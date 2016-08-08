@@ -3,8 +3,46 @@
 	<title>
 		Seaker Project
 	</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript">
+		var counter = 0;
+		var ballPosition = [];
+		var now;
+		function loaded() {
+			now = setInterval(moveBall , 1000);
+		}
+		function moveBall() {
+			if(counter > 10){
+				clearInterval(now);
+			}
+			counter++;
+			var myArray = [ 0 , 1];
+			var rand = myArray[Math.floor(Math.random() * myArray.length)];
+			if(rand == 0){
+				var test = document.querySelector('#ball');
+	 			var left_margin = window.getComputedStyle(test).getPropertyValue("margin-left");
+				left_margin = left_margin.match(/\d+/);
+				var newM = left_margin[0] - 20;
+				document.getElementById('ball').style.marginLeft = newM + 'px';
+				ballPosition.push(newM);
+			}
+			else if(rand == 1){
+				var test = document.querySelector('#ball');
+	 			var left_margin = window.getComputedStyle(test).getPropertyValue("margin-left");
+				left_margin = left_margin.match(/\d+/);
+				var newM = (parseInt(left_margin[0]) + 20);
+				document.getElementById('ball').style.marginLeft = newM + 'px';
+				ballPosition.push(newM);
+			}	
+		}
+	</script>
 </head>
-<body>
-	
+<body onload="loaded()">
+	<div id="completeDiv">
+	<div id="ball"></div>
+	<div id="bar"><hr/></div>
+	<div id="moveBall">
+	</div>
+	</div>
 </body>
 </html>
