@@ -6,14 +6,21 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript">
 		var counter = 0;
+		var newCounter = 0;
 		var ballPosition = [];
 		var now;
+		var isPaused = false;
 		function loaded() {
 			now = setInterval(moveBall , 1000);
 		}
 		function moveBall() {
 			if(counter > 10){
 				clearInterval(now);
+				document.getElementById('seakBar').style.display ='block';
+				document.getElementById('seakPosition').style.display ='block';
+				document.getElementById('play').style.display ='block';
+				document.getElementById('pause').style.display ='block';
+				document.getElementById('ball').style.marginLeft = "650px";
 			}
 			counter++;
 			var myArray = [ 0 , 1];
@@ -35,6 +42,36 @@
 				ballPosition.push(newM);
 			}	
 		}
+
+		function startPlay() {
+			console.log(ballPosition);
+			if(!isPaused){
+				now = setInterval(replayBall , 1000);
+			}
+			else {
+				isPaused = false;
+			}	
+		}
+
+		function pausePlay() {
+			isPaused = true;
+		}
+
+		function replayBall() {
+			if(!isPaused){
+				if(newCounter > ballPosition.length - 2){
+					clearInterval(now);
+				}
+				var test = document.querySelector('#seakPosition');
+	 			var left_margin = window.getComputedStyle(test).getPropertyValue("margin-left");
+				left_margin = left_margin.match(/\d+/);
+				var newM = (parseInt(left_margin[0]) + 41);
+				document.getElementById('seakPosition').style.marginLeft = newM + 'px';
+				document.getElementById('ball').style.marginLeft = ballPosition[newCounter] + 'px';	
+				console.log(document.getElementById('ball').style.marginLeft);	
+				newCounter++;
+			}
+		}
 	</script>
 </head>
 <body onload="loaded()">
@@ -43,6 +80,12 @@
 	<div id="bar"><hr/></div>
 	<div id="moveBall">
 	</div>
+	<div id="seakPosition">
+	</div>
+	<div id="seakBar">
+	</div>
+	<button id="play" onclick="startPlay()">Play</button>
+	<button id="pause" onclick="pausePlay()">Pause</button>
 	</div>
 </body>
 </html>
