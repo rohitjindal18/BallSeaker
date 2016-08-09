@@ -43,3 +43,40 @@
 	text-align: center;
 	color: red;
 }
+#seakPosition {
+	display: none;
+	margin-left: 420px;
+	background-color: green;
+	width: 16px;
+	border-radius: 8px;
+	height: 16px;
+	margin-top: 35px;
+	position: absolute;
+}
+
+#seakBar {
+	display: none;
+	margin-left: 420px;
+	margin-top: 40px;
+	width: 500px;
+	height: 6px;
+	background-color: blue;
+}
+
+#play {
+	display: none;
+	margin-left: 500px;
+	width: 150px;
+	height: 30px;
+	background-color: gray;
+	margin-top: 60px;
+}
+
+#pause {
+	display: none;
+	margin-left: 700px;
+	width: 150px;
+	height: 30px;
+	background-color: gray;
+	margin-top: -31px;
+}
